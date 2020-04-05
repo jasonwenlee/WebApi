@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="newproceduredbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="complication">
+          <Key>
+            <PropertyRef Name="ComplicationID" />
+          </Key>
+          <Property Name="ProcedureID" Type="int" Nullable="false" />
+          <Property Name="ComplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="DiagramURL" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="history">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="ProcedureID" Type="int" Nullable="false" />
+          <Property Name="HistoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="history_has_reference">
+          <Key>
+            <PropertyRef Name="History_HistoryID" />
+            <PropertyRef Name="Reference_ReferenceID" />
+          </Key>
+          <Property Name="History_HistoryID" Type="int" Nullable="false" />
+          <Property Name="Reference_ReferenceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="keypoint">
+          <Key>
+            <PropertyRef Name="KeyPointID" />
+          </Key>
+          <Property Name="ProcedureID" Type="int" Nullable="false" />
+          <Property Name="KeyPointID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Importance" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DiagramURL" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="procedure">
+          <Key>
+            <PropertyRef Name="ProcedureID" />
+          </Key>
+          <Property Name="ProcedureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LongName" Type="nvarchar(max)" />
+          <Property Name="ShortName" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="VideoSource" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="procedure_has_relatedprocedure">
+          <Key>
+            <PropertyRef Name="Procedure_has_RelatedProcedurecol" />
+          </Key>
+          <Property Name="Procedure_has_RelatedProcedurecol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProcedureID" Type="int" Nullable="false" />
+          <Property Name="RelatedProcedureID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reference">
+          <Key>
+            <PropertyRef Name="ReferenceID" />
+          </Key>
+          <Property Name="ProcedureID" Type="int" Nullable="false" />
+          <Property Name="ReferenceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="step">
+          <Key>
+            <PropertyRef Name="StepID" />
+          </Key>
+          <Property Name="ProcedureID" Type="int" Nullable="false" />
+          <Property Name="StepID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="DiagramURL" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="variation">
+          <Key>
+            <PropertyRef Name="VariationID" />
+          </Key>
+          <Property Name="ProcedureID" Type="int" Nullable="false" />
+          <Property Name="VariationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Header" Type="nvarchar(max)" />
+          <Property Name="SubHeader" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="complication$fk_Complication_Procedure1">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="complication" Type="Self.complication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="complication">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="history$fk_History_Procedure1">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="history_has_reference$fk_History_has_Reference_History1">
+          <End Role="history" Type="Self.history" Multiplicity="1" />
+          <End Role="history_has_reference" Type="Self.history_has_reference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="history">
+              <PropertyRef Name="HistoryID" />
+            </Principal>
+            <Dependent Role="history_has_reference">
+              <PropertyRef Name="History_HistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="history_has_reference$fk_History_has_Reference_Reference1">
+          <End Role="reference" Type="Self.reference" Multiplicity="1" />
+          <End Role="history_has_reference" Type="Self.history_has_reference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reference">
+              <PropertyRef Name="ReferenceID" />
+            </Principal>
+            <Dependent Role="history_has_reference">
+              <PropertyRef Name="Reference_ReferenceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="keypoint$fk_KeyPoint_Procedure">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="keypoint" Type="Self.keypoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="keypoint">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="procedure_has_relatedprocedure$fk_Procedure_has_Procedure_Procedure1">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="procedure_has_relatedprocedure" Type="Self.procedure_has_relatedprocedure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="procedure_has_relatedprocedure">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="procedure_has_relatedprocedure$fk_Procedure_has_Procedure_Procedure2">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="procedure_has_relatedprocedure" Type="Self.procedure_has_relatedprocedure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="procedure_has_relatedprocedure">
+              <PropertyRef Name="RelatedProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reference$fk_Reference_Procedure1">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="reference" Type="Self.reference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="reference">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="step$fk_Step_Procedure1">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="step" Type="Self.step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="step">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="variation$fk_Variation_Procedure1">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="variation" Type="Self.variation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="variation">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="newproceduredbModelStoreContainer">
+          <EntitySet Name="complication" EntityType="Self.complication" Schema="procpageourdb" store:Type="Tables" />
+          <EntitySet Name="history" EntityType="Self.history" Schema="procpageourdb" store:Type="Tables" />
+          <EntitySet Name="history_has_reference" EntityType="Self.history_has_reference" Schema="procpageourdb" store:Type="Tables" />
+          <EntitySet Name="keypoint" EntityType="Self.keypoint" Schema="procpageourdb" store:Type="Tables" />
+          <EntitySet Name="procedure" EntityType="Self.procedure" Schema="procpageourdb" store:Type="Tables" />
+          <EntitySet Name="procedure_has_relatedprocedure" EntityType="Self.procedure_has_relatedprocedure" Schema="procpageourdb" store:Type="Tables" />
+          <EntitySet Name="reference" EntityType="Self.reference" Schema="procpageourdb" store:Type="Tables" />
+          <EntitySet Name="step" EntityType="Self.step" Schema="procpageourdb" store:Type="Tables" />
+          <EntitySet Name="variation" EntityType="Self.variation" Schema="procpageourdb" store:Type="Tables" />
+          <AssociationSet Name="complication$fk_Complication_Procedure1" Association="Self.complication$fk_Complication_Procedure1">
+            <End Role="procedure" EntitySet="procedure" />
+            <End Role="complication" EntitySet="complication" />
+          </AssociationSet>
+          <AssociationSet Name="history$fk_History_Procedure1" Association="Self.history$fk_History_Procedure1">
+            <End Role="procedure" EntitySet="procedure" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+          <AssociationSet Name="history_has_reference$fk_History_has_Reference_History1" Association="Self.history_has_reference$fk_History_has_Reference_History1">
+            <End Role="history" EntitySet="history" />
+            <End Role="history_has_reference" EntitySet="history_has_reference" />
+          </AssociationSet>
+          <AssociationSet Name="history_has_reference$fk_History_has_Reference_Reference1" Association="Self.history_has_reference$fk_History_has_Reference_Reference1">
+            <End Role="reference" EntitySet="reference" />
+            <End Role="history_has_reference" EntitySet="history_has_reference" />
+          </AssociationSet>
+          <AssociationSet Name="keypoint$fk_KeyPoint_Procedure" Association="Self.keypoint$fk_KeyPoint_Procedure">
+            <End Role="procedure" EntitySet="procedure" />
+            <End Role="keypoint" EntitySet="keypoint" />
+          </AssociationSet>
+          <AssociationSet Name="procedure_has_relatedprocedure$fk_Procedure_has_Procedure_Procedure1" Association="Self.procedure_has_relatedprocedure$fk_Procedure_has_Procedure_Procedure1">
+            <End Role="procedure" EntitySet="procedure" />
+            <End Role="procedure_has_relatedprocedure" EntitySet="procedure_has_relatedprocedure" />
+          </AssociationSet>
+          <AssociationSet Name="procedure_has_relatedprocedure$fk_Procedure_has_Procedure_Procedure2" Association="Self.procedure_has_relatedprocedure$fk_Procedure_has_Procedure_Procedure2">
+            <End Role="procedure" EntitySet="procedure" />
+            <End Role="procedure_has_relatedprocedure" EntitySet="procedure_has_relatedprocedure" />
+          </AssociationSet>
+          <AssociationSet Name="reference$fk_Reference_Procedure1" Association="Self.reference$fk_Reference_Procedure1">
+            <End Role="procedure" EntitySet="procedure" />
+            <End Role="reference" EntitySet="reference" />
+          </AssociationSet>
+          <AssociationSet Name="step$fk_Step_Procedure1" Association="Self.step$fk_Step_Procedure1">
+            <End Role="procedure" EntitySet="procedure" />
+            <End Role="step" EntitySet="step" />
+          </AssociationSet>
+          <AssociationSet Name="variation$fk_Variation_Procedure1" Association="Self.variation$fk_Variation_Procedure1">
+            <End Role="procedure" EntitySet="procedure" />
+            <End Role="variation" EntitySet="variation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="newproceduredbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="complication">
+          <Key>
+            <PropertyRef Name="ComplicationID" />
+          </Key>
+          <Property Name="ProcedureID" Type="Int32" Nullable="false" />
+          <Property Name="ComplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiagramURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="procedure" Relationship="Self.complication_fk_Complication_Procedure1" FromRole="complication" ToRole="procedure" />
+        </EntityType>
+        <EntityType Name="history">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="ProcedureID" Type="Int32" Nullable="false" />
+          <Property Name="HistoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="procedure" Relationship="Self.history_fk_History_Procedure1" FromRole="history" ToRole="procedure" />
+          <NavigationProperty Name="references" Relationship="Self.history_has_reference" FromRole="history" ToRole="reference" />
+        </EntityType>
+        <EntityType Name="keypoint">
+          <Key>
+            <PropertyRef Name="KeyPointID" />
+          </Key>
+          <Property Name="ProcedureID" Type="Int32" Nullable="false" />
+          <Property Name="KeyPointID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Importance" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiagramURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="procedure" Relationship="Self.keypoint_fk_KeyPoint_Procedure" FromRole="keypoint" ToRole="procedure" />
+        </EntityType>
+        <EntityType Name="procedure">
+          <Key>
+            <PropertyRef Name="ProcedureID" />
+          </Key>
+          <Property Name="ProcedureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LongName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VideoSource" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="complications" Relationship="Self.complication_fk_Complication_Procedure1" FromRole="procedure" ToRole="complication" />
+          <NavigationProperty Name="histories" Relationship="Self.history_fk_History_Procedure1" FromRole="procedure" ToRole="history" />
+          <NavigationProperty Name="keypoints" Relationship="Self.keypoint_fk_KeyPoint_Procedure" FromRole="procedure" ToRole="keypoint" />
+          <NavigationProperty Name="procedures" Relationship="Self.procedure_has_relatedprocedure_fk_Procedure_has_Procedure_Procedure1" FromRole="procedure" ToRole="procedure_has_relatedprocedure" />
+          <NavigationProperty Name="relatedprocedures" Relationship="Self.procedure_has_relatedprocedure_fk_Procedure_has_Procedure_Procedure2" FromRole="procedure" ToRole="procedure_has_relatedprocedure" />
+          <NavigationProperty Name="references" Relationship="Self.reference_fk_Reference_Procedure1" FromRole="procedure" ToRole="reference" />
+          <NavigationProperty Name="steps" Relationship="Self.step_fk_Step_Procedure1" FromRole="procedure" ToRole="step" />
+          <NavigationProperty Name="variations" Relationship="Self.variation_fk_Variation_Procedure1" FromRole="procedure" ToRole="variation" />
+        </EntityType>
+        <EntityType Name="procedure_has_relatedprocedure">
+          <Key>
+            <PropertyRef Name="Procedure_has_RelatedProcedurecol" />
+          </Key>
+          <Property Name="Procedure_has_RelatedProcedurecol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcedureID" Type="Int32" Nullable="false" />
+          <Property Name="RelatedProcedureID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="procedure" Relationship="Self.procedure_has_relatedprocedure_fk_Procedure_has_Procedure_Procedure1" FromRole="procedure_has_relatedprocedure" ToRole="procedure" />
+          <NavigationProperty Name="procedure1" Relationship="Self.procedure_has_relatedprocedure_fk_Procedure_has_Procedure_Procedure2" FromRole="procedure_has_relatedprocedure" ToRole="procedure" />
+        </EntityType>
+        <EntityType Name="reference">
+          <Key>
+            <PropertyRef Name="ReferenceID" />
+          </Key>
+          <Property Name="ProcedureID" Type="Int32" Nullable="false" />
+          <Property Name="ReferenceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="procedure" Relationship="Self.reference_fk_Reference_Procedure1" FromRole="reference" ToRole="procedure" />
+          <NavigationProperty Name="histories" Relationship="Self.history_has_reference" FromRole="reference" ToRole="history" />
+        </EntityType>
+        <EntityType Name="step">
+          <Key>
+            <PropertyRef Name="StepID" />
+          </Key>
+          <Property Name="ProcedureID" Type="Int32" Nullable="false" />
+          <Property Name="StepID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiagramURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="procedure" Relationship="Self.step_fk_Step_Procedure1" FromRole="step" ToRole="procedure" />
+        </EntityType>
+        <EntityType Name="variation">
+          <Key>
+            <PropertyRef Name="VariationID" />
+          </Key>
+          <Property Name="ProcedureID" Type="Int32" Nullable="false" />
+          <Property Name="VariationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Header" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubHeader" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="procedure" Relationship="Self.variation_fk_Variation_Procedure1" FromRole="variation" ToRole="procedure" />
+        </EntityType>
+        <Association Name="complication_fk_Complication_Procedure1">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="complication" Type="Self.complication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="complication">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="history_fk_History_Procedure1">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="keypoint_fk_KeyPoint_Procedure">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="keypoint" Type="Self.keypoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="keypoint">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="procedure_has_relatedprocedure_fk_Procedure_has_Procedure_Procedure1">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="procedure_has_relatedprocedure" Type="Self.procedure_has_relatedprocedure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="procedure_has_relatedprocedure">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="procedure_has_relatedprocedure_fk_Procedure_has_Procedure_Procedure2">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="procedure_has_relatedprocedure" Type="Self.procedure_has_relatedprocedure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="procedure_has_relatedprocedure">
+              <PropertyRef Name="RelatedProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reference_fk_Reference_Procedure1">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="reference" Type="Self.reference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="reference">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="step_fk_Step_Procedure1">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="step" Type="Self.step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="step">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="variation_fk_Variation_Procedure1">
+          <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
+          <End Role="variation" Type="Self.variation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="procedure">
+              <PropertyRef Name="ProcedureID" />
+            </Principal>
+            <Dependent Role="variation">
+              <PropertyRef Name="ProcedureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="history_has_reference">
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <End Role="reference" Type="Self.reference" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="myproceduresEntities" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="complications" EntityType="Self.complication" />
+          <EntitySet Name="histories" EntityType="Self.history" />
+          <EntitySet Name="keypoints" EntityType="Self.keypoint" />
+          <EntitySet Name="procedures" EntityType="Self.procedure" />
+          <EntitySet Name="procedure_has_relatedprocedure" EntityType="Self.procedure_has_relatedprocedure" />
+          <EntitySet Name="references" EntityType="Self.reference" />
+          <EntitySet Name="steps" EntityType="Self.step" />
+          <EntitySet Name="variations" EntityType="Self.variation" />
+          <AssociationSet Name="complication_fk_Complication_Procedure1" Association="Self.complication_fk_Complication_Procedure1">
+            <End Role="procedure" EntitySet="procedures" />
+            <End Role="complication" EntitySet="complications" />
+          </AssociationSet>
+          <AssociationSet Name="history_fk_History_Procedure1" Association="Self.history_fk_History_Procedure1">
+            <End Role="procedure" EntitySet="procedures" />
+            <End Role="history" EntitySet="histories" />
+          </AssociationSet>
+          <AssociationSet Name="keypoint_fk_KeyPoint_Procedure" Association="Self.keypoint_fk_KeyPoint_Procedure">
+            <End Role="procedure" EntitySet="procedures" />
+            <End Role="keypoint" EntitySet="keypoints" />
+          </AssociationSet>
+          <AssociationSet Name="procedure_has_relatedprocedure_fk_Procedure_has_Procedure_Procedure1" Association="Self.procedure_has_relatedprocedure_fk_Procedure_has_Procedure_Procedure1">
+            <End Role="procedure" EntitySet="procedures" />
+            <End Role="procedure_has_relatedprocedure" EntitySet="procedure_has_relatedprocedure" />
+          </AssociationSet>
+          <AssociationSet Name="procedure_has_relatedprocedure_fk_Procedure_has_Procedure_Procedure2" Association="Self.procedure_has_relatedprocedure_fk_Procedure_has_Procedure_Procedure2">
+            <End Role="procedure" EntitySet="procedures" />
+            <End Role="procedure_has_relatedprocedure" EntitySet="procedure_has_relatedprocedure" />
+          </AssociationSet>
+          <AssociationSet Name="reference_fk_Reference_Procedure1" Association="Self.reference_fk_Reference_Procedure1">
+            <End Role="procedure" EntitySet="procedures" />
+            <End Role="reference" EntitySet="references" />
+          </AssociationSet>
+          <AssociationSet Name="step_fk_Step_Procedure1" Association="Self.step_fk_Step_Procedure1">
+            <End Role="procedure" EntitySet="procedures" />
+            <End Role="step" EntitySet="steps" />
+          </AssociationSet>
+          <AssociationSet Name="variation_fk_Variation_Procedure1" Association="Self.variation_fk_Variation_Procedure1">
+            <End Role="procedure" EntitySet="procedures" />
+            <End Role="variation" EntitySet="variations" />
+          </AssociationSet>
+          <AssociationSet Name="history_has_reference" Association="Self.history_has_reference">
+            <End Role="history" EntitySet="histories" />
+            <End Role="reference" EntitySet="references" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="newproceduredbModelStoreContainer" CdmEntityContainer="myproceduresEntities">
+          <EntitySetMapping Name="complications">
+            <EntityTypeMapping TypeName="newproceduredbModel.complication">
+              <MappingFragment StoreEntitySet="complication">
+                <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
+                <ScalarProperty Name="ComplicationID" ColumnName="ComplicationID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DiagramURL" ColumnName="DiagramURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="histories">
+            <EntityTypeMapping TypeName="newproceduredbModel.history">
+              <MappingFragment StoreEntitySet="history">
+                <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
+                <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="keypoints">
+            <EntityTypeMapping TypeName="newproceduredbModel.keypoint">
+              <MappingFragment StoreEntitySet="keypoint">
+                <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
+                <ScalarProperty Name="KeyPointID" ColumnName="KeyPointID" />
+                <ScalarProperty Name="Importance" ColumnName="Importance" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DiagramURL" ColumnName="DiagramURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="procedures">
+            <EntityTypeMapping TypeName="newproceduredbModel.procedure">
+              <MappingFragment StoreEntitySet="procedure">
+                <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
+                <ScalarProperty Name="LongName" ColumnName="LongName" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="VideoSource" ColumnName="VideoSource" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="procedure_has_relatedprocedure">
+            <EntityTypeMapping TypeName="newproceduredbModel.procedure_has_relatedprocedure">
+              <MappingFragment StoreEntitySet="procedure_has_relatedprocedure">
+                <ScalarProperty Name="Procedure_has_RelatedProcedurecol" ColumnName="Procedure_has_RelatedProcedurecol" />
+                <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
+                <ScalarProperty Name="RelatedProcedureID" ColumnName="RelatedProcedureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="references">
+            <EntityTypeMapping TypeName="newproceduredbModel.reference">
+              <MappingFragment StoreEntitySet="reference">
+                <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
+                <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="steps">
+            <EntityTypeMapping TypeName="newproceduredbModel.step">
+              <MappingFragment StoreEntitySet="step">
+                <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
+                <ScalarProperty Name="StepID" ColumnName="StepID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="DiagramURL" ColumnName="DiagramURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="variations">
+            <EntityTypeMapping TypeName="newproceduredbModel.variation">
+              <MappingFragment StoreEntitySet="variation">
+                <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
+                <ScalarProperty Name="VariationID" ColumnName="VariationID" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="SubHeader" ColumnName="SubHeader" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="history_has_reference" TypeName="newproceduredbModel.history_has_reference" StoreEntitySet="history_has_reference">
+            <EndProperty Name="history">
+              <ScalarProperty Name="HistoryID" ColumnName="History_HistoryID" />
+            </EndProperty>
+            <EndProperty Name="reference">
+              <ScalarProperty Name="ReferenceID" ColumnName="Reference_ReferenceID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2b72b43c792a4b2f87c1485421f8ad47" Name="Diagram1">
+        <EntityTypeShape EntityType="newproceduredbModel.complication" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="newproceduredbModel.history" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="newproceduredbModel.keypoint" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="newproceduredbModel.procedure" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="newproceduredbModel.procedure_has_relatedprocedure" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="newproceduredbModel.reference" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="newproceduredbModel.step" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="newproceduredbModel.variation" Width="1.5" PointX="3" PointY="19.25" IsExpanded="true" />
+        <AssociationConnector Association="newproceduredbModel.complication_fk_Complication_Procedure1" ManuallyRouted="false" />
+        <AssociationConnector Association="newproceduredbModel.history_fk_History_Procedure1" ManuallyRouted="false" />
+        <AssociationConnector Association="newproceduredbModel.keypoint_fk_KeyPoint_Procedure" ManuallyRouted="false" />
+        <AssociationConnector Association="newproceduredbModel.procedure_has_relatedprocedure_fk_Procedure_has_Procedure_Procedure1" ManuallyRouted="false" />
+        <AssociationConnector Association="newproceduredbModel.procedure_has_relatedprocedure_fk_Procedure_has_Procedure_Procedure2" ManuallyRouted="false" />
+        <AssociationConnector Association="newproceduredbModel.reference_fk_Reference_Procedure1" ManuallyRouted="false" />
+        <AssociationConnector Association="newproceduredbModel.step_fk_Step_Procedure1" ManuallyRouted="false" />
+        <AssociationConnector Association="newproceduredbModel.variation_fk_Variation_Procedure1" ManuallyRouted="false" />
+        <AssociationConnector Association="newproceduredbModel.history_has_reference" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
