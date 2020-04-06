@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="newproceduredbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="newproceduredbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="complication">
           <Key>
             <PropertyRef Name="ComplicationID" />
@@ -74,6 +74,7 @@
           <Property Name="StepID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="DiagramURL" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" />
         </EntityType>
         <EntityType Name="variation">
           <Key>
@@ -255,8 +256,7 @@
             <End Role="variation" EntitySet="variation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="newproceduredbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -338,6 +338,7 @@
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DiagramURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="procedure" Relationship="Self.step_fk_Step_Procedure1" FromRole="step" ToRole="procedure" />
+          <Property Name="Number" Type="Int32" />
         </EntityType>
         <EntityType Name="variation">
           <Key>
@@ -563,6 +564,7 @@
           <EntitySetMapping Name="steps">
             <EntityTypeMapping TypeName="newproceduredbModel.step">
               <MappingFragment StoreEntitySet="step">
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
                 <ScalarProperty Name="StepID" ColumnName="StepID" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
