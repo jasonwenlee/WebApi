@@ -13,6 +13,7 @@
           <Property Name="ComplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="DiagramURL" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" />
         </EntityType>
         <EntityType Name="history">
           <Key>
@@ -21,6 +22,7 @@
           <Property Name="ProcedureID" Type="int" Nullable="false" />
           <Property Name="HistoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" />
         </EntityType>
         <EntityType Name="history_has_reference">
           <Key>
@@ -39,6 +41,7 @@
           <Property Name="Importance" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="DiagramURL" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" />
         </EntityType>
         <EntityType Name="procedure">
           <Key>
@@ -65,6 +68,7 @@
           <Property Name="ProcedureID" Type="int" Nullable="false" />
           <Property Name="ReferenceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" />
         </EntityType>
         <EntityType Name="step">
           <Key>
@@ -84,6 +88,7 @@
           <Property Name="VariationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Header" Type="nvarchar(max)" />
           <Property Name="SubHeader" Type="nvarchar(max)" />
+          <Property Name="Number" Type="int" />
         </EntityType>
         <Association Name="complication$fk_Complication_Procedure1">
           <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
@@ -269,6 +274,7 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DiagramURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="procedure" Relationship="Self.complication_fk_Complication_Procedure1" FromRole="complication" ToRole="procedure" />
+          <Property Name="Number" Type="Int32" />
         </EntityType>
         <EntityType Name="history">
           <Key>
@@ -279,6 +285,7 @@
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="procedure" Relationship="Self.history_fk_History_Procedure1" FromRole="history" ToRole="procedure" />
           <NavigationProperty Name="references" Relationship="Self.history_has_reference" FromRole="history" ToRole="reference" />
+          <Property Name="Number" Type="Int32" />
         </EntityType>
         <EntityType Name="keypoint">
           <Key>
@@ -290,6 +297,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DiagramURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="procedure" Relationship="Self.keypoint_fk_KeyPoint_Procedure" FromRole="keypoint" ToRole="procedure" />
+          <Property Name="Number" Type="Int32" />
         </EntityType>
         <EntityType Name="procedure">
           <Key>
@@ -328,6 +336,7 @@
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="procedure" Relationship="Self.reference_fk_Reference_Procedure1" FromRole="reference" ToRole="procedure" />
           <NavigationProperty Name="histories" Relationship="Self.history_has_reference" FromRole="reference" ToRole="history" />
+          <Property Name="Number" Type="Int32" />
         </EntityType>
         <EntityType Name="step">
           <Key>
@@ -349,6 +358,7 @@
           <Property Name="Header" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SubHeader" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="procedure" Relationship="Self.variation_fk_Variation_Procedure1" FromRole="variation" ToRole="procedure" />
+          <Property Name="Number" Type="Int32" />
         </EntityType>
         <Association Name="complication_fk_Complication_Procedure1">
           <End Role="procedure" Type="Self.procedure" Multiplicity="1" />
@@ -505,6 +515,7 @@
           <EntitySetMapping Name="complications">
             <EntityTypeMapping TypeName="newproceduredbModel.complication">
               <MappingFragment StoreEntitySet="complication">
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
                 <ScalarProperty Name="ComplicationID" ColumnName="ComplicationID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -515,6 +526,7 @@
           <EntitySetMapping Name="histories">
             <EntityTypeMapping TypeName="newproceduredbModel.history">
               <MappingFragment StoreEntitySet="history">
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
                 <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
@@ -524,6 +536,7 @@
           <EntitySetMapping Name="keypoints">
             <EntityTypeMapping TypeName="newproceduredbModel.keypoint">
               <MappingFragment StoreEntitySet="keypoint">
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
                 <ScalarProperty Name="KeyPointID" ColumnName="KeyPointID" />
                 <ScalarProperty Name="Importance" ColumnName="Importance" />
@@ -555,6 +568,7 @@
           <EntitySetMapping Name="references">
             <EntityTypeMapping TypeName="newproceduredbModel.reference">
               <MappingFragment StoreEntitySet="reference">
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
                 <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
@@ -575,6 +589,7 @@
           <EntitySetMapping Name="variations">
             <EntityTypeMapping TypeName="newproceduredbModel.variation">
               <MappingFragment StoreEntitySet="variation">
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ProcedureID" ColumnName="ProcedureID" />
                 <ScalarProperty Name="VariationID" ColumnName="VariationID" />
                 <ScalarProperty Name="Header" ColumnName="Header" />

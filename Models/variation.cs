@@ -18,6 +18,7 @@ namespace WebApi.Models
         public int VariationID { get; set; }
         public string Header { get; set; }
         public string SubHeader { get; set; }
+        public Nullable<int> Number { get; set; }
     
         public virtual procedure procedure { get; set; }
     }
