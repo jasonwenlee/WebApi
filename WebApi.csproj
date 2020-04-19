@@ -210,6 +210,9 @@
     <Compile Include="Models\step.cs">
       <DependentUpon>ProcedureModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>ProcedureModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\variation.cs">
       <DependentUpon>ProcedureModel.tt</DependentUpon>
     </Compile>

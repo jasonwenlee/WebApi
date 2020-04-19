@@ -8,8 +8,8 @@
         <EntityTypeShape EntityType="newproceduredbModel.complication" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="newproceduredbModel.history" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="newproceduredbModel.keypoint" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="newproceduredbModel.procedure" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="newproceduredbModel.procedure_has_relatedprocedure" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="newproceduredbModel.procedure" Width="1.875" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="newproceduredbModel.procedure_has_relatedprocedure" Width="3.125" PointX="3" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="newproceduredbModel.reference" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="newproceduredbModel.step" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
         <EntityTypeShape EntityType="newproceduredbModel.variation" Width="1.5" PointX="3" PointY="19.25" IsExpanded="true" />
@@ -22,6 +22,7 @@
         <AssociationConnector Association="newproceduredbModel.step_fk_Step_Procedure1" ManuallyRouted="false" />
         <AssociationConnector Association="newproceduredbModel.variation_fk_Variation_Procedure1" ManuallyRouted="false" />
         <AssociationConnector Association="newproceduredbModel.history_has_reference" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="newproceduredbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

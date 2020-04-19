@@ -34,5 +34,6 @@ namespace WebApi.Models
         public virtual DbSet<reference> references { get; set; }
         public virtual DbSet<step> steps { get; set; }
         public virtual DbSet<variation> variations { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

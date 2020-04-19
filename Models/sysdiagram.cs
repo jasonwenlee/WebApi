@@ -12,15 +12,12 @@ namespace WebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class keypoint
+    public partial class sysdiagram
     {
-        public int ProcedureID { get; set; }
-        public int KeyPointID { get; set; }
-        public string Description { get; set; }
-        public string DiagramURL { get; set; }
-        public Nullable<int> Number { get; set; }
-        public string Header { get; set; }
-    
-        public virtual procedure procedure { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
