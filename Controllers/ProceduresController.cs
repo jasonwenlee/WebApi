@@ -25,8 +25,7 @@ namespace WebApi.Controllers
                                 .Include(i => i.complications)
                                 .Include(i => i.keypoints)
                                 .Include(i => i.histories)
-                                .Include(i => i.references)
-                                .Include(i => i.relatedprocedures);
+                                .Include(i => i.references);
         }
 
         // GET: api/Procedures/5
@@ -39,7 +38,6 @@ namespace WebApi.Controllers
                                                      .Include(i => i.keypoints)
                                                      .Include(i => i.histories)
                                                      .Include(i => i.references)
-                                                     .Include(i => i.relatedprocedures)
                                                      .FirstOrDefaultAsync(i => i.ProcedureID == id);
             if (procedure == null)
             {
@@ -112,7 +110,12 @@ namespace WebApi.Controllers
             {
                 try
                 {
-                    db.procedure_has_relatedprocedure.RemoveRange(db.procedure_has_relatedprocedure.Where(x => x.RelatedProcedureID == id));
+                    db.steps.RemoveRange(db.steps.Where(x => x.procedure.ProcedureID == id));
+                    db.keypoints.RemoveRange(db.keypoints.Where(x => x.procedure.ProcedureID == id));
+                    db.variations.RemoveRange(db.variations.Where(x => x.procedure.ProcedureID == id));
+                    db.complications.RemoveRange(db.complications.Where(x => x.procedure.ProcedureID == id));
+                    db.histories.RemoveRange(db.histories.Where(x => x.procedure.ProcedureID == id));
+                    db.references.RemoveRange(db.references.Where(x => x.procedure.ProcedureID == id));
                 }
                 catch (Exception)
                 {

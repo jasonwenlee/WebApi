@@ -20,8 +20,6 @@ namespace WebApi.Models
             this.complications = new HashSet<complication>();
             this.histories = new HashSet<history>();
             this.keypoints = new HashSet<keypoint>();
-            this.procedures = new HashSet<procedure_has_relatedprocedure>();
-            this.relatedprocedures = new HashSet<procedure_has_relatedprocedure>();
             this.references = new HashSet<reference>();
             this.steps = new HashSet<step>();
             this.variations = new HashSet<variation>();
@@ -39,10 +37,6 @@ namespace WebApi.Models
         public virtual ICollection<history> histories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<keypoint> keypoints { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<procedure_has_relatedprocedure> procedures { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<procedure_has_relatedprocedure> relatedprocedures { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<reference> references { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

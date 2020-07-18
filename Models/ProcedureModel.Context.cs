@@ -30,10 +30,8 @@ namespace WebApi.Models
         public virtual DbSet<history> histories { get; set; }
         public virtual DbSet<keypoint> keypoints { get; set; }
         public virtual DbSet<procedure> procedures { get; set; }
-        public virtual DbSet<procedure_has_relatedprocedure> procedure_has_relatedprocedure { get; set; }
         public virtual DbSet<reference> references { get; set; }
         public virtual DbSet<step> steps { get; set; }
         public virtual DbSet<variation> variations { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

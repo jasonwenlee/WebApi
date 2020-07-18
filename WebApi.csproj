@@ -201,16 +201,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProcedureModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\procedure_has_relatedprocedure.cs">
-      <DependentUpon>ProcedureModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\reference.cs">
       <DependentUpon>ProcedureModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\step.cs">
-      <DependentUpon>ProcedureModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>ProcedureModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\variation.cs">
@@ -266,6 +260,7 @@
     <Content Include="Models\ProcedureModel.edmx.diagram">
       <DependentUpon>ProcedureModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\EsaWebApi - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\WebApi.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
